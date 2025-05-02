@@ -3,7 +3,7 @@ import configparser, os, sys, pandas as pd
 from sqlalchemy.orm import sessionmaker
 import sqlalchemy
 # from model.models import Demographics, Waveforms, Leads, Base
-import cx_Oracle, pyodbc, mysql.connector
+import oracledb, pyodbc, mysql.connector
 
 
 class DBConnector:
@@ -65,9 +65,9 @@ class DBConnector:
         database = config[database_type]["database"]
         if database_type == "Oracle":
             oracle_client_path = r"C:\drivers\oracle\instantclient\instantclient_23_7"
-            cx_Oracle.init_oracle_client(lib_dir=oracle_client_path)
-            dsn_tns = cx_Oracle.makedsn(host, port, database)
-            return cx_Oracle.connect(user, password, dsn_tns)
+            oracledb.init_oracle_client(lib_dir=oracle_client_path)
+            dsn_tns = oracledb.makedsn(host, port, database)
+            return oracledb.connect(user, password, dsn_tns)
 
         elif database_type == "MSSQL":
             return pyodbc.connect(

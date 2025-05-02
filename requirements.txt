@@ -1,6 +1,6 @@
 cffi==1.17.1
 cryptography==44.0.2
-cx-oracle==8.3.0
+oracledb==3.0.0
 demographics==0.0.1
 greenlet==3.1.1
 mysql-connector-python==9.2.0
