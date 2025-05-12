@@ -19,12 +19,12 @@ def run_query(cursor, file_name):
 
 def main():
     # Your main logic here
-    options = ['','query1.sql', 'query2.sql', 'query3.sql', 'exit']
+    options = ['','insert.sql', 'players.sql', 'all_auctions.sql', 'lowest_bin.sql', 'lbin_by_rarity.sql', 'exit']
 
     conn = DBConnector.DBConnector(connectionType="MySQL").getConnection()
     cursor = conn.cursor()
 
-    st.title('CS315 Project Example')
+    st.title('CS315 Project - Skyblock Auctions')
     selected_query = st.selectbox('select query you would like to display', options)
 
     if selected_query =='exit':
@@ -32,6 +32,11 @@ def main():
         conn.close()
         st.success('Connection closed.')
         st.stop()
+    elif selected_query == 'insert.sql':
+        file_name = f"sql/{selected_query}"
+        cursor.execute(get_sql_script(file_name))
+        conn.commit()
+        st.write("Done")
     elif selected_query:
         file_name = f"sql/{selected_query}"
         df = run_query(cursor, file_name)
