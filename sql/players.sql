@@ -1,0 +1,1 @@
+select BIN_TO_UUID(uuid), username from Skyblock.Player;
